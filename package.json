@@ -1,0 +1,51 @@
+{
+  "name": "malvinas.argentinadatos.com",
+  "version": "0.0.1",
+  "description": "Banners de las Islas Malvinas para Argentina Datos",
+  "packageManager": "pnpm@10.11.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && mkdir -p dist/assets && cp src/assets/islasmalvinas.svg dist/assets/islasmalvinas.svg",
+    "prepack": "pnpm run build",
+    "build:banners": "tsx src/cli/generate.ts",
+    "site:dev": "pnpm --filter malvinas-argentina-datos-site dev",
+    "site:build": "pnpm run build:banners && pnpm --filter malvinas-argentina-datos-site build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "malvinas",
+    "banner",
+    "takumi",
+    "og-image",
+    "argentina"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "takumi-js": "1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}

@@ -1,0 +1,105 @@
+---
+import "../styles/global.css";
+import MalvinasHome from "../components/MalvinasHome";
+
+const site = Astro.site ?? new URL("https://malvinas.argentinadatos.com/");
+const base = site.href.endsWith("/") ? site.href : `${site.href}/`;
+const ogImage = new URL("og.png", base).href;
+const title = "Islas Malvinas — Banners para compartir";
+const description =
+  "Imágenes listas para usar en redes sociales, blogs y sitios web, con el mapa de las islas y mensajes sobre la soberanía argentina. Gratis, sin registro.";
+const variants = [
+  {
+    id: "strip",
+    w: 800,
+    h: 130,
+    publicName: "Franja",
+    forWho:
+      "Ideal si tenés un blog, documentación o sitio y querés una banda fina al inicio o al pie de página.",
+  },
+  {
+    id: "og",
+    w: 1200,
+    h: 630,
+    publicName: "Vista previa de enlaces",
+    forWho:
+      "Cuando compartís un enlace en WhatsApp, Facebook, Telegram o X, muchas apps muestran una imagen grande: esta es la pensada para eso.",
+  },
+  {
+    id: "square",
+    w: 1080,
+    h: 1080,
+    publicName: "Cuadrado",
+    forWho:
+      "Pensada para publicaciones donde la foto es cuadrada, como muchas publicaciones en Instagram o carruseles.",
+  },
+  {
+    id: "header",
+    w: 1500,
+    h: 500,
+    publicName: "Portada de perfil",
+    forWho:
+      "Formato ancho para la imagen de cabecera de un perfil (por ejemplo en X/Twitter u otras redes que usan ese tipo de banner).",
+  },
+] as const;
+---
+
+<!doctype html>
+<html lang="es" data-theme="kumo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={base} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Malvinas — Argentina Datos" />
+    <meta property="og:url" content={base} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <a
+      class="skip-link sr-only"
+      href="#contenido">Ir al contenido principal</a
+    >
+    <MalvinasHome client:load base={base} ogImage={ogImage} variants={variants} />
+    <style is:global>
+      .skip-link:focus,
+      .skip-link:focus-visible {
+        clip-path: none;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 50;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 0.625rem 1rem;
+        overflow: visible;
+        white-space: normal;
+        border-radius: 0.5rem;
+        background-color: var(--color-kumo-contrast);
+        color: var(--text-color-kumo-inverse);
+        font-size: var(--text-sm);
+        font-weight: 600;
+        box-shadow:
+          0 1px 3px 0 rgb(0 0 0 / 0.1),
+          0 1px 2px -1px rgb(0 0 0 / 0.1);
+        outline: none;
+        text-decoration: none;
+      }
+      .skip-link:focus-visible {
+        outline: 2px solid var(--color-kumo-ring);
+        outline-offset: 2px;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+/* Kumo + Tailwind v4 — import order matters (see @cloudflare/kumo README) */
+@source "../../node_modules/@cloudflare/kumo/dist/**/*.{js,jsx,ts,tsx}";
+@source "../**/*.{astro,js,jsx,ts,tsx,mjs}";
+@import "@cloudflare/kumo/styles/tailwind";
+@import "tailwindcss";
