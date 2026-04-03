@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import MalvinasHome from "../components/MalvinasHome";
 
+const gaMeasurementId = "G-5TDPR4M2HQ";
+
 const site = Astro.site ?? new URL("https://malvinas.argentinadatos.com/");
 const base = site.href.endsWith("/") ? site.href : `${site.href}/`;
 const ogImage = new URL("og.png", base).href;
@@ -48,6 +50,15 @@ const variants = [
 <html lang="es" data-theme="kumo">
   <head>
     <meta charset="UTF-8" />
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+    <script is:inline define:vars={{ gaMeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", gaMeasurementId);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
